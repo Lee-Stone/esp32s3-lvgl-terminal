@@ -131,5 +131,5 @@ pio device monitor -b 115200
 - 本项目参考了多个开源项目库，在此致谢各位大佬！
 - 若发现问题或有改进建议，欢迎提交issue 与 PR ~
 - 如果对您有帮助，欢迎在 GitHub 上给个 Star 支持一下，会持续更新功能与优化软件结构和硬件需求 ~
-- 欢迎关注我的b站账号[会打狙的船长](https://space.bilibili.com/455474218?spm_id_from=333.40164.0.0)和抖音[嵌入式小黑子](https://www.douyin.com/user/MS4wLjABAAAA93EGipD_xAKDd-Qf6lBw07it01oe0HzHE5AW2j9ePjNjbGdEdMG7ic1TDM7EmsUI)，获取更多开源项目和嵌入式学习资料！
+- 欢迎关注我的b站账号[会打狙的船长](https://space.bilibili.com/455474218?spm_id_from=333.40164.0.0)！
 
