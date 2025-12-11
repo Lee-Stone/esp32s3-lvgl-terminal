@@ -68,6 +68,55 @@ void CST816S::read_touch() {
 void IRAM_ATTR CST816S::handleISR(void) {
   _event_available = true;
 
+  // Call user callback if it has been set
+  if (userISR != nullptr) {
+      userISR();
+  }
+}
+
+/*!
+    @brief  enable double click
+*/
+void CST816S::enable_double_click(void) {
+  byte enableDoubleTap = 0x01; // Set EnDClick (bit 0) to enable double-tap
+  i2c_write(CST816S_ADDRESS, 0xEC, &enableDoubleTap, 1);
+}
+
+/*!
+    @brief  Disable auto sleep mode
+*/
+void CST816S::disable_auto_sleep(void)
+{
+  byte disableAutoSleep = 0xFE; // Non-zero value disables auto sleep
+  i2c_write(CST816S_ADDRESS, 0xFE, &disableAutoSleep, 1);
+}
+
+/*!
+    @brief  Enable auto sleep mode
+*/
+void CST816S::enable_auto_sleep(void)
+{
+  byte enableAutoSleep = 0x00; // 0 value enables auto sleep
+  i2c_write(CST816S_ADDRESS, 0xFE, &enableAutoSleep, 1);
+}
+
+/*!
+    @brief  Set the auto sleep time
+    @param  seconds Time in seconds (1-255) before entering standby mode after inactivity
+*/
+void CST816S::set_auto_sleep_time(int seconds)
+{
+  if (seconds < 1)
+  {
+    seconds = 1; // Enforce minimum value of 1 second
+  }
+  else if (seconds > 255)
+  {
+    seconds = 255; // Enforce maximum value of 255 seconds
+  }
+
+  byte sleepTime = static_cast<byte>(seconds); // Convert int to byte
+  i2c_write(CST816S_ADDRESS, 0xF9, &sleepTime, 1);
 }
 
 /*!
@@ -93,6 +142,15 @@ void CST816S::begin(int interrupt) {
   i2c_read(CST816S_ADDRESS, 0xA7, data.versionInfo, 3);
 
   // attachInterrupt(_irq, std::bind(&CST816S::handleISR, this), interrupt);
+}
+
+/*!
+    @brief  Attaches a user-defined callback function to be triggered on an interrupt event from the CST816S touch controller.
+    @param  callback  A function to be called when an interrupt event occurs, must have no parameters and return void.
+*/
+void CST816S::attachUserInterrupt(std::function<void(void)> callback)
+{
+  userISR = callback;
 }
 
 /*!
@@ -167,7 +225,7 @@ String CST816S::gesture() {
 	@param	length
 			length of data
 */
-uint8_t CST816S::i2c_read(uint16_t addr, uint8_t reg_addr, uint8_t *reg_data, uint32_t length)
+uint8_t CST816S::i2c_read(uint16_t addr, uint8_t reg_addr, uint8_t *reg_data, size_t length)
 {
   Wire.beginTransmission(addr);
   Wire.write(reg_addr);
@@ -191,7 +249,7 @@ uint8_t CST816S::i2c_read(uint16_t addr, uint8_t reg_addr, uint8_t *reg_data, ui
 	@param	length
 			length of data
 */
-uint8_t CST816S::i2c_write(uint8_t addr, uint8_t reg_addr, const uint8_t *reg_data, uint32_t length)
+uint8_t CST816S::i2c_write(uint8_t addr, uint8_t reg_addr, const uint8_t *reg_data, size_t length)
 {
   Wire.beginTransmission(addr);
   Wire.write(reg_addr);

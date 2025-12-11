@@ -23,6 +23,7 @@ extern "C" {
 #include "../misc/lv_area.h"
 #include "../misc/lv_ll.h"
 #include "../misc/lv_timer.h"
+#include "../misc/lv_ll.h"
 
 /*********************
  *      DEFINES
@@ -117,7 +118,6 @@ typedef struct _lv_disp_drv_t {
 
     void (*clear_cb)(struct _lv_disp_drv_t * disp_drv, uint8_t * buf, uint32_t size);
 
-
     /** OPTIONAL: Called after every refresh cycle to tell the rendering and flushing time + the
      * number of flushed pixels*/
     void (*monitor_cb)(struct _lv_disp_drv_t * disp_drv, uint32_t time, uint32_t px);
@@ -186,6 +186,9 @@ typedef struct _lv_disp_t {
     uint8_t inv_area_joined[LV_INV_BUF_SIZE];
     uint16_t inv_p;
     int32_t inv_en_cnt;
+
+    /** Double buffer sync areas */
+    lv_ll_t sync_areas;
 
     /*Miscellaneous data*/
     uint32_t last_activity_time;        /**< Last time when there was activity on this display*/
@@ -308,7 +311,6 @@ bool lv_disp_get_antialiasing(lv_disp_t * disp);
  * @return dpi of the display
  */
 lv_coord_t lv_disp_get_dpi(const lv_disp_t * disp);
-
 
 /**
  * Set the rotation of this display.

@@ -58,6 +58,11 @@ class CST816S {
   public:
     CST816S(int sda, int scl, int rst, int irq);
     void begin(int interrupt = RISING);
+    void enable_double_click();
+    void disable_auto_sleep();
+    void enable_auto_sleep();
+    void set_auto_sleep_time(int seconds);
+    void attachUserInterrupt(std::function<void(void)> callback);
     void sleep();
     bool available();
     data_struct data;
@@ -70,12 +75,14 @@ class CST816S {
     int _rst;
     int _irq;
     bool _event_available;
+    std::function<void(void)> userISR;
+
 
     void IRAM_ATTR handleISR();
     void read_touch();
 
-    uint8_t i2c_read(uint16_t addr, uint8_t reg_addr, uint8_t * reg_data, uint32_t length);
-    uint8_t i2c_write(uint8_t addr, uint8_t reg_addr, const uint8_t * reg_data, uint32_t length);
+    uint8_t i2c_read(uint16_t addr, uint8_t reg_addr, uint8_t * reg_data, size_t length);
+    uint8_t i2c_write(uint8_t addr, uint8_t reg_addr, const uint8_t * reg_data, size_t length);
 };
 
 #endif

@@ -1,6 +1,10 @@
-#ifndef _MUSIC_H
-#define _MUSIC_H
+#ifndef MUSIC_H
+#define MUSIC_H
 
-#include <all_data.h>
+#include "config.h"
 
-#endif
+void music_init();
+void music_read();
+void music_update();
+
+#endif // MUSIC_H

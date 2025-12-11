@@ -1,6 +1,11 @@
-#ifndef __WIFIUSER_H__
-#define __WIFIUSER_H__
- 
-#include <all_data.h>
- 
-#endif
+#ifndef WIFIUSER_H
+#define WIFIUSER_H
+
+#include "config.h"
+
+void WiFi_update();
+void WiFi_scan();
+void WiFi_connect();
+void WiFi_init();
+
+#endif /* WIFIUSER_H */

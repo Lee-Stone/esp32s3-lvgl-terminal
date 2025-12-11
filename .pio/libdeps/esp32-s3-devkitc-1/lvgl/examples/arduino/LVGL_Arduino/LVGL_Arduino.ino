@@ -116,6 +116,19 @@ void setup()
     lv_obj_t *label = lv_label_create( lv_scr_act() );
     lv_label_set_text( label, "Hello Ardino and LVGL!");
     lv_obj_align( label, LV_ALIGN_CENTER, 0, 0 );
+
+    /* Simple button example */
+    lv_obj_t *btn = lv_btn_create(lv_scr_act());
+    lv_obj_set_size(btn, 120, 50);
+    lv_obj_align(btn, LV_ALIGN_CENTER, 0, 60);
+    lv_obj_t *btn_label = lv_label_create(btn);
+    lv_label_set_text(btn_label, "Click me");
+    lv_obj_center(btn_label);
+    lv_obj_add_event_cb(btn, [](lv_event_t *e){
+        if(lv_event_get_code(e) == LV_EVENT_CLICKED){
+            Serial.println("LVGL button clicked");
+        }
+    }, LV_EVENT_CLICKED, NULL);
  
     /* Try an example. See all the examples 
      * online: https://docs.lvgl.io/master/examples.html

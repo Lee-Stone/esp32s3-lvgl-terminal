@@ -1,6 +1,8 @@
-#ifndef SDUSER_HH
-#define SDUSER_HH
+#ifndef SDUSER_H
+#define SDUSER_H
 
-#include <all_data.h>
+#include "config.h"
 
-#endif
+void SD_init();
+
+#endif // SDUSER_H
