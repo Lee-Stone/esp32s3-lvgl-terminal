@@ -125,9 +125,9 @@ esp32s3-lvgl-terminal/
 
 ### 3. 硬件实物
 
-![硬件V2-正面](assets/硬件V2-正面.png)
+![硬件V2-正面](images/硬件V2-正面.png)
 
-![硬件V2-反面](assets/硬件V2-反面.png)
+![硬件V2-反面](images/硬件V2-反面.png)
 
 ### 4. 硬件原理图
 
