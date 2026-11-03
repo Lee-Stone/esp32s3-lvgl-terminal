@@ -2,6 +2,9 @@
 
 基于 ESP32-S3 的 LVGL 多功能智能终端，集成Wi-Fi和亮度设置、串口终端、时间和天气显示、音乐播放、小智AI语音对话、小游戏等功能。
 
+> **🔗 PS**：本工程的 ESP-IDF 版已开源：[esp32s3-lvgl-terminal.idf](https://github.com/Lee-Stone/esp32s3-lvgl-terminal.idf)。
+
+
 ****
 
 **⭐ 欢迎提出Issues和PR，如果这个项目对你有帮助，请给个 Star！**
@@ -88,7 +91,7 @@ esp32s3-lvgl-terminal/
 ### 1. 物料清单
 
 - **主控芯片**：【ESP32-S3 N16R8】16MB Flash + 8MB PSRAM
-- **显示屏**：【ST7789】3.5寸 SPI TFT 320x240
+- **显示屏**：【ST7789】2.8 寸 SPI TFT 320x240
 - **触摸屏**：【CST816S】I2C 电容触摸
 - **音频输出**：【NS4168】I2S DAC 功放模块
 - **麦克风**：【MSM261S4030H0R】I2S MEMS 数字麦克风
@@ -179,8 +182,6 @@ esp32s3-lvgl-terminal/
 **克隆项目**：
 
 ```powershell
-# 任选其一
-git clone https://github.com/CaddonThaw/esp32s3-lvgl-terminal.git
 git clone https://github.com/Lee-Stone/esp32s3-lvgl-terminal.git
 ```
 
